@@ -1,0 +1,29 @@
+{
+  "name": "water-sort",
+  "version": "1.0.0",
+  "description": "colored water sorting puzzles",
+  "main": "main.js",
+  "scripts": {
+    "build-pug": "pug src/pug -o dist",
+    "build-ts": "rollup -c",
+    "build-sass": "sass src/sass/main.sass dist/assets/main.css",
+    "build": "npm run build-pug && npm run build-sass && npm run build-ts",
+    "dev-pug": "pug -w src/pug -o dist",
+    "dev-sass": "sass -w src/sass/main.sass dist/assets/main.css",
+    "dev-ts": "rollup --watch -c",
+    "dev": "concurrently --kill-others \"npm run dev-pug\" \"npm run dev-sass\" \"npm run dev-ts\""
+  },
+  "keywords": [
+    "game",
+    "puzzle"
+  ],
+  "author": "GnsP <sir.gnsp@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.3",
+    "concurrently": "^8.2.1",
+    "pug-cli": "^1.0.0-alpha6",
+    "rollup": "^3.29.2",
+    "sass": "^1.68.0"
+  }
+}
