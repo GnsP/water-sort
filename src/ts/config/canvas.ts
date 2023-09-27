@@ -19,13 +19,13 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import typescript from '@rollup/plugin-typescript';
+export const GAME_CANVAS_ID: string = "main";
+export const CANVAS: HTMLCanvasElement = <HTMLCanvasElement>(
+  document.getElementById(GAME_CANVAS_ID)
+);
 
-export default {
-  input: 'src/ts/main.ts',
-  output: {
-    dir: 'dist/assets',
-    format: 'iife',
-  },
-  plugins: [typescript()],
-};
+export const CANVAS_WIDTH: number = CANVAS.width;
+export const CANVAS_HEIGHT: number = CANVAS.height;
+
+export const CANVAS_2D_CONTEXT: CanvasRenderingContext2D =
+  CANVAS.getContext("2d");

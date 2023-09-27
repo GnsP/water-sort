@@ -19,13 +19,31 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import typescript from '@rollup/plugin-typescript';
+export const LIQUID_COLORS: string[] = [
+  "#9400FF",
+  "#FFA1F5",
+  "#97FFF3",
+  "#0000FF",
+  "#FF00FF",
+  "#16FF00",
+  "#379237",
+  "#FCE700",
+  "#FF9551",
+  "#FF1E1E",
+  "#F8F8F8",
+  "#7E8A97",
+  "#AC4B1C",
+  "#AB0072",
+];
 
-export default {
-  input: 'src/ts/main.ts',
-  output: {
-    dir: 'dist/assets',
-    format: 'iife',
-  },
-  plugins: [typescript()],
-};
+type Range = [number, number];
+
+export const TESTTUBE_WIDTH: number = 32;
+export const TESTTUBE_HEIGHT: number = 152;
+export const LIQUID_UNIT: number = 32 * 32;
+export const ROW_HEIGHT: number = 240;
+export const ROW_TOP_PADDING: number = 64;
+
+export const LEVEL_EASY_RANGE: Range = [6, 8];
+export const LEVEL_MEDIUM_RANGE: Range = [9, 12];
+export const LEVEL_HARD_RANGE: Range = [13, 14];

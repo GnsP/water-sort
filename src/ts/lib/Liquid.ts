@@ -19,13 +19,38 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import typescript from '@rollup/plugin-typescript';
+import { animate, linearEasing, EasingFunction } from "./animation-utils";
 
-export default {
-  input: 'src/ts/main.ts',
-  output: {
-    dir: 'dist/assets',
-    format: 'iife',
-  },
-  plugins: [typescript()],
-};
+export class Liquid {
+  static NONE: Liquid = new Liquid();
+
+  public volume: number;
+  public readonly color: string;
+
+  constructor(color: string = "", volume: number = 0) {
+    this.color = color;
+    this.volume = volume;
+  }
+
+  public async addVolume(
+    volumeToAdd: number,
+    duration: number = 0,
+    easing: EasingFunction = linearEasing
+  ): Promise<boolean> {
+    const oldVolume = this.volume;
+    await animate((frac: number): void => {
+      this.volume = easing(oldVolume, oldVolume + volumeToAdd, frac);
+    }, duration);
+
+    return true;
+  }
+
+  public clone(): Liquid {
+    return new Liquid(this.color, this.volume);
+  }
+
+  public setVolume(vol: number): Liquid {
+    this.volume = vol;
+    return this;
+  }
+}

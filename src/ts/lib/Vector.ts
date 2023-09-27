@@ -19,13 +19,41 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import typescript from '@rollup/plugin-typescript';
+export class Vector {
+  public x: number;
+  public y: number;
 
-export default {
-  input: 'src/ts/main.ts',
-  output: {
-    dir: 'dist/assets',
-    format: 'iife',
-  },
-  plugins: [typescript()],
-};
+  /**
+   * Constructs a vector from 2 numbers a and b.
+   * If isPolar is true, then a is the magnitude and b is the direction of the vector.
+   * If isPolar is false, then a is the x coordinate and b is the y coordinate of the vector
+   *
+   * @param a number
+   * @param b number
+   * @param isPolar boolean
+   * @returns a Vector
+   */
+  constructor(a: number, b: number, isPolar: boolean = false) {
+    if (!isPolar) {
+      this.x = a;
+      this.y = b;
+      return this;
+    }
+
+    this.x = a * Math.cos(b);
+    this.y = a * Math.sin(b);
+    return this;
+  }
+
+  public add(that: Vector): Vector {
+    return new Vector(this.x + that.x, this.y + that.y);
+  }
+
+  public mirrorY(): Vector {
+    return new Vector(this.x, -this.y);
+  }
+
+  public move(a: number, b: number = 0, isPolar: boolean = false): Vector {
+    return this.add(new Vector(a, b, isPolar).mirrorY());
+  }
+}

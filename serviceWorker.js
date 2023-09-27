@@ -19,13 +19,22 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import typescript from '@rollup/plugin-typescript';
+const CACHE_NAME = "potions-game-cache";
 
-export default {
-  input: 'src/ts/main.ts',
-  output: {
-    dir: 'dist/assets',
-    format: 'iife',
-  },
-  plugins: [typescript()],
-};
+const assets = ["/", "/index.html", "/assets/main.css", "/assets/main.js"];
+
+self.addEventListener("install", (installEvent) => {
+  installEvent.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      cache.addAll(assets);
+    })
+  );
+});
+
+self.addEventListener("fetch", (fetchEvent) => {
+  fetchEvent.respondWith(
+    caches.match(fetchEvent.request).then((res) => {
+      return res || fetch(fetchEvent.request);
+    })
+  );
+});

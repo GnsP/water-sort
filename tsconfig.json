@@ -4,10 +4,11 @@
         "sourceMap": true,
         "lib": [
             "ES2020",
-            "DOM"
+            "DOM",
+            "WebWorker"
         ],
         "noUnusedLocals": true,
         "noEmitHelpers": false,
-        "module": "commonjs"
+        "module": "ESNext"
     }
 }

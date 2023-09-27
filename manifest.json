@@ -1,0 +1,15 @@
+{
+    "name": "Water sort",
+    "short_name": "Water sort",
+    "theme_color": "#1d1d1d",
+    "background_color": "#1d1d1d",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+        {
+          "src": "/icon-512x512.png",
+          "type": "image/png", "sizes": "512x512"
+        }
+    ]
+}

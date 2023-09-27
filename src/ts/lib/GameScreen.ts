@@ -19,13 +19,36 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import typescript from '@rollup/plugin-typescript';
+import { Drawable } from "./Drawable";
+import { clear, animate } from "./animation-utils";
+import { CANVAS_2D_CONTEXT } from "../config/canvas";
 
-export default {
-  input: 'src/ts/main.ts',
-  output: {
-    dir: 'dist/assets',
-    format: 'iife',
-  },
-  plugins: [typescript()],
-};
+export class GameScreen {
+  static instance: GameScreen = null;
+
+  public objects: Drawable[];
+
+  constructor() {
+    if (GameScreen.instance) return GameScreen.instance;
+
+    this.objects = [];
+    GameScreen.instance = this;
+    this.init();
+    return this;
+  }
+
+  private init(): void {
+    clear();
+    animate(() => {
+      clear();
+      const objectsCopy = [...this.objects];
+      objectsCopy.sort((a, b) => a.zindex - b.zindex);
+      objectsCopy.forEach((obj) => obj.draw(CANVAS_2D_CONTEXT));
+    }, Infinity);
+  }
+
+  public setObjects(objects: Drawable[]): GameScreen {
+    this.objects = objects;
+    return this;
+  }
+}

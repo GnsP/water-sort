@@ -1,3 +1,22 @@
+//- Created on Sun Sep 24 2023
+
+//- The MIT License (MIT)
+//- Copyright (c) 2023 Ganesh Prasad Sahoo
+
+//- Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+//- and associated documentation files (the "Software"), to deal in the Software without restriction,
+//- including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+//- and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+//- subject to the following conditions:
+
+//- The above copyright notice and this permission notice shall be included in all copies or substantial
+//- portions of the Software.
+
+//- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+//- TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+//- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+//- TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 doctype html
 html
     head
@@ -7,15 +26,18 @@ html
         link(rel="preconnect",href="https://fonts.gstatic.com",crossorigin)
         link(href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap",rel="stylesheet")
         link(rel="stylesheet",href="./assets/main.css")
+        link(rel="manifest",href="./manifest.json")
 
     body
         .container
             .levels-container.spaced
                 button.outlined#prev-level
                     span.material-symbols-outlined arrow_back_ios
-                h2 Level 1
+                h2#level-text Level 1
                 button.outlined#next-level
                     span.material-symbols-outlined arrow_forward_ios
+                button.outlined#new-game
+                    span.button-text NEW GAME
             .actions-container.spaced
                 button#reset
                     span.material-symbols-outlined restart_alt
@@ -23,14 +45,25 @@ html
                 button#undo
                     span.material-symbols-outlined undo
                 .spacer
-                button#add-one
-                    span.material-symbols-outlined labs
-                .spacer-xs
                 button#solve
-                    span.material-symbols-outlined priority
+                    span.material-symbols-outlined done
+                    span.button-text SOLVE IT!
             .hcenter
                 canvas#main(width="320px", height="480px")
             .footer
                 p coding games with gnsp
+
+            .modal-overlay#modal-overlay
+                .modal#modal
+                    h3#modal-heading MODAL HEADING
+                    p#modal-text THIS IS A LINE OF TEXT. THIS IS THE NEXT SENTENCE. DO YOU WANT TO CONTINUE ?
+                    .modal-actions
+                        button#modal-action
+                            span.material-symbols-outlined#modal-action-icon done
+                            span.button-text#modal-action-text YES
+                        button#modal-cancel
+                            span.material-symbols-outlined close
+                            span.button-text CANCEL
+                    
         
         script(type="text/javascript",src="./assets/main.js")

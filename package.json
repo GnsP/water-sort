@@ -4,10 +4,11 @@
   "description": "colored water sorting puzzles",
   "main": "main.js",
   "scripts": {
+    "copy-pwa": "cp manifest.json dist && cp serviceWorker.js dist && cp icon-512x512.png dist",
     "build-pug": "pug src/pug -o dist",
     "build-ts": "rollup -c",
     "build-sass": "sass src/sass/main.sass dist/assets/main.css",
-    "build": "npm run build-pug && npm run build-sass && npm run build-ts",
+    "build": "npm run build-pug && npm run build-sass && npm run build-ts && npm run copy-pwa",
     "dev-pug": "pug -w src/pug -o dist",
     "dev-sass": "sass -w src/sass/main.sass dist/assets/main.css",
     "dev-ts": "rollup --watch -c",
